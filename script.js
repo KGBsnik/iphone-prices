@@ -64,7 +64,7 @@ function generalFormForAllShops(source, searchExpression,amountOfPriceSymbols,na
 
 //or try https://crossorigin.me/
 // https://cors-anywhere.herokuapp.com/
-$.get('http://iphone-prices.herokuapp.com/' + source, function(response) {
+$.get('https://iphone-prices.herokuapp.com/' + source, function(response) {
 
 
 
