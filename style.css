@@ -65,8 +65,10 @@ height: 4rem;
 .for-parse {
 	border:1px solid white;
 	white-space: nowrap;
-	animation-name:changeOpacity;
-	animation-duration: 6s;
+	-webkit-animation-name:changeOpacity;
+	        animation-name:changeOpacity;
+	-webkit-animation-duration: 6s;
+	        animation-duration: 6s;
 }
 
 
@@ -76,6 +78,12 @@ footer {
 	width:100%;
 	background-color:#231240;
 	opacity:0.9;
+}
+
+
+@-webkit-keyframes changeOpacity {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 
