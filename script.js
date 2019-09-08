@@ -31,11 +31,20 @@ node.setAttribute("role", "status");
 node.setAttribute("aria-hidden", "true");
 document.getElementById(idNumber).appendChild(node);
 document.getElementById(idNumber).innerHTML = "Загрузка...";
+
+/*
 setTimeout(function() {
        document.getElementById(idNumber).setAttribute("disabled", true);
        document.getElementById(idNumber).innerHTML = "Загружено";
    }, 5000);
-};
+*/
+
+
+
+
+
+
+
 
 // Define general get and past function
 
@@ -49,7 +58,7 @@ if (source === 'mvideo') {
 };
 
 if (source === 'citili') {
-	generalFormForAllShops(arguments[i],'price-block_standard"><span class="price"><ins class="num">',6,'Ситилинк',wherePutThePrice);
+	generalFormForAllShops(arguments[i],'price_column_one":',5,'Ситилинк',wherePutThePrice);
 };
 
 if (source === 'techno') {
@@ -64,14 +73,16 @@ function generalFormForAllShops(source, searchExpression,amountOfPriceSymbols,na
 
 //or try https://crossorigin.me/
 // https://cors-anywhere.herokuapp.com/
-$.get('https://iphone-prices.herokuapp.com/' + source, function(response) {
+fetch('https://iphone-prices.herokuapp.com/' + source).then(function(response) {
 
+response.text().then(function(text) {
 
+document.getElementById(idNumber).setAttribute("disabled", true);
+document.getElementById(idNumber).innerHTML = "Загружено";
 
+let showMeIndex = (text.indexOf(searchExpression));
 
-let showMeIndex = (response.indexOf(searchExpression));
-
-let sliceInfo = response.slice( (showMeIndex + searchExpression.length), (showMeIndex + searchExpression.length + amountOfPriceSymbols));
+let sliceInfo = text.slice( (showMeIndex + searchExpression.length), (showMeIndex + searchExpression.length + amountOfPriceSymbols));
 
 
 var para = document.createElement("div");
@@ -81,7 +92,7 @@ para.appendChild(node);
 var element = document.getElementById(wherePutThePrice);
 element.appendChild(para);
 
-
+})
 
 });
 
@@ -92,15 +103,8 @@ element.appendChild(para);
 
 
 
-//div1 content
-
-function ShowDivContent(ID) {
-
-showLoadButton(ID);
-
-
 //decide where put the prices
-var wherePutThePrice = 'div' + (ID.slice(3,ID.length - 6));
+var wherePutThePrice = 'div' + (idNumber.slice(3,idNumber.length - 6));
 
 
 
@@ -112,27 +116,39 @@ getAndPast('','','','',wherePutThePrice);
 */
 
 
-if (ID == 'div0button') {
+if (idNumber == 'div0button') {
 //for Apple iPhone XR 64GB
 getAndPast('https://www.mvideo.ru/products/smartfon-apple-iphone-xr-64gb-black-mry42ru-a-30040032','https://www.citilink.ru/catalog/mobile/cell_phones/1088809/','https://www.technopark.ru/smartfon-apple-iphone-xr-64gb-chernyy/','https://shop.mts.ru/product/smartfon-apple-iphone-xr-64gb-black-chernyj',wherePutThePrice);
 }
 
 
-else if (ID == 'div1button') {
+else if (idNumber == 'div1button') {
 //Apple iPhone XS 64GB
 getAndPast('https://www.mvideo.ru/products/smartfon-apple-iphone-xs-64gb-gold-mt9g2ru-a-30040016','https://www.citilink.ru/catalog/mobile/cell_phones/1088875/','https://www.technopark.ru/smartfon-apple-iphone-xs-64gb-zolotoy/','https://shop.mts.ru/product/smartfon-apple-iphone-xs-64gb-gold-zolotoj',wherePutThePrice);
 }
 
 
-else if (ID == 'div2button') {
+else if (idNumber == 'div2button') {
 //for Apple iPhone 8 Plus 64GB
 getAndPast('https://www.mvideo.ru/products/smartfon-apple-iphone-8-plus-64gb-gold-mq8n2ru-a-30030159','https://www.citilink.ru/catalog/mobile/cell_phones/499051/','https://www.technopark.ru/smartfon-apple-iphone-8-plus-64gb-zolotoy/','https://shop.mts.ru/product/smartfon-iphone-8-64-gb-space-grey',wherePutThePrice);
 }
 
 
-else if (ID == 'div3button') {
+else if (idNumber == 'div3button') {
 //Apple iPhone 7 32Gb
 getAndPast('https://www.mvideo.ru/products/smartfon-apple-iphone-7-32gb-black-mn8x2ru-a-30026135','https://www.citilink.ru/catalog/mobile/cell_phones/393677/','https://www.technopark.ru/smartfon-apple-iphone-7-plus-32gb-chernyy-mnqm2rua/','https://shop.mts.ru/product/smartfon-apple-iphone-7-32gb-black-mn8x2ru-a',wherePutThePrice);
 }
+
+
+
+
+};
+
+//div1 content
+
+function ShowDivContent(ID) {
+
+showLoadButton(ID);
+
 
 };
